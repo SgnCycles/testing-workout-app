@@ -1,17 +1,12 @@
 // Added footer test
-
 import { render, screen } from "@testing-library/react";
 import Footer from "@/components/Footer";
 
-describe("The header works ok", () => {
-  test("The header is an H1 and has specific text", () => {
+describe("The footer works ok", () => {
+  test("The footer renders and has a specific text", () => {
     render(<Footer />);
-
-    const headerTitle = screen.getByRole("heading", {
-      level: 1,
-      name: /workout timer/i,
-    });
-
-    expect(headerTitle).toBeInTheDocument();
+    const footer = screen.getByRole("contentinfo");
+    expect(footer).toBeInTheDocument();
+    expect(footer).toHaveTextContent(/sgncycles/i)
   });
 });

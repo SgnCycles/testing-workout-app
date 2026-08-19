@@ -1,6 +1,8 @@
 const Header = () => {
   return (
-    <header></header>
+    <header>
+      <h1>Workout Timer</h1>
+    </header>
   )
 }
 
