@@ -1,7 +1,5 @@
 # Proposal:
 
-
-
 ## Workout timer
 
 On homepage, choose between workouts. 

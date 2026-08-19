@@ -1,115 +1,110 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import Timer from '.'
-import { act } from 'react'
+import { fireEvent, render, screen } from "@testing-library/react";
+import Timer from "@/components/Timer";
+import { act } from "react";
 
 describe("The timer works", () => {
-
   test("The start button and starttime shows", () => {
+    render(<Timer startTime={10} />);
 
-    render(<Timer startTime={10} />)
+    const startButton = screen.getByRole("button", { name: /start/i });
+    expect(startButton).toBeInTheDocument();
 
-    const startButton = screen.getByRole("button", { "name": /start/i })
-    expect(startButton).toBeInTheDocument()
-
-    const initialTime = screen.getByText("10")
-    expect(initialTime).toBeInTheDocument()
-
-  })
+    const initialTime = screen.getByText("10");
+    expect(initialTime).toBeInTheDocument();
+  });
 
   test("Start changes to LETS GO when clicked", () => {
-    render(<Timer startTime={10} />)
+    render(<Timer startTime={10} />);
 
-    const startButton = screen.getByRole("button", { "name": /start/i })
+    const startButton = screen.getByRole("button", { name: /start/i });
 
-    fireEvent.click(startButton)
+    fireEvent.click(startButton);
 
-    expect(startButton).not.toHaveTextContent(/start/i)
-    expect(startButton).toHaveTextContent(/lets go/i)
-
-  })
+    expect(startButton).not.toHaveTextContent(/start/i);
+    expect(startButton).toHaveTextContent(/lets go/i);
+  });
 
   test("Timer counts down correctly", () => {
-    jest.useFakeTimers()
-    render(<Timer startTime={10} />)
+    jest.useFakeTimers();
+    render(<Timer startTime={10} />);
 
-    const startButton = screen.getByRole("button", { "name": /start/i })
+    const startButton = screen.getByRole("button", { name: /start/i });
 
-    fireEvent.click(startButton)
+    fireEvent.click(startButton);
 
     act(() => {
-      jest.advanceTimersByTime(1000)
-    })
+      jest.advanceTimersByTime(1000);
+    });
 
-    const newTime = screen.getByText(9)
+    const newTime = screen.getByText(9);
 
-    expect(newTime).toBeInTheDocument()
+    expect(newTime).toBeInTheDocument();
 
-    jest.useRealTimers()
-  })
+    jest.useRealTimers();
+  });
 
   test("Shows victory screen at 0 sec and reset button works correctly", () => {
-    jest.useFakeTimers()
-    render(<Timer startTime={1} />)
+    jest.useFakeTimers();
+    render(<Timer startTime={1} />);
 
-    let startButton = screen.getByRole("button", { "name": /start/i })
+    let startButton = screen.getByRole("button", { name: /start/i });
 
-    let victoryMessage = screen.queryByText(/you did it/i)
+    let victoryMessage = screen.queryByText(/you did it/i);
 
-    expect(victoryMessage).not.toBeInTheDocument()
+    expect(victoryMessage).not.toBeInTheDocument();
 
-    fireEvent.click(startButton)
+    fireEvent.click(startButton);
 
     act(() => {
-      jest.advanceTimersByTime(1000)
-    })
+      jest.advanceTimersByTime(1000);
+    });
 
-    victoryMessage = screen.getByText(/you did it/i)
+    victoryMessage = screen.getByText(/you did it/i);
 
-    expect(victoryMessage).toBeInTheDocument()
+    expect(victoryMessage).toBeInTheDocument();
 
+    // Resetbutton
 
-    // Resetbutton 
+    const resetButton = screen.getByRole("button", { name: /reset/i });
 
-    const resetButton = screen.getByRole("button", { "name": /reset/i })
+    fireEvent.click(resetButton);
 
-    fireEvent.click(resetButton)
+    victoryMessage = screen.queryByText(/you did it/i);
 
-    victoryMessage = screen.queryByText(/you did it/i)
+    expect(victoryMessage).not.toBeInTheDocument();
 
-    expect(victoryMessage).not.toBeInTheDocument()
+    startButton = screen.getByRole("button", { name: /start/i });
+    expect(startButton).toBeInTheDocument();
 
-    startButton = screen.getByRole("button", { "name": /start/i })
-    expect(startButton).toBeInTheDocument()
+    const startTime = screen.getByText(1);
+    expect(startTime).toBeInTheDocument();
 
-    const startTime = screen.getByText(1)
-    expect(startTime).toBeInTheDocument()
-
-    jest.useRealTimers()
-  })
+    jest.useRealTimers();
+  });
 
   test("The timer does not count below 0", () => {
-    jest.useFakeTimers()
-    render(<Timer startTime={1} />)
+    jest.useFakeTimers();
+    render(<Timer startTime={1} />);
 
-    let startButton = screen.getByRole("button", { "name": /start/i })
+    let startButton = screen.getByRole("button", { name: /start/i });
 
-    fireEvent.click(startButton)
-
-    act(() => {
-      jest.advanceTimersByTime(1000)
-    })
-
-    const time = screen.getByText(0)
-    expect(time).toBeInTheDocument()
+    fireEvent.click(startButton);
 
     act(() => {
-      jest.advanceTimersByTime(2000)
-    })
+      jest.advanceTimersByTime(1000);
+    });
 
-    const minusTime = screen.queryByText(-1)
-    expect(minusTime).not.toBeInTheDocument()
-    expect(time).toBeInTheDocument()
+    const time = screen.getByText(0);
+    expect(time).toBeInTheDocument();
 
-    jest.useRealTimers()
-  })
-})
+    act(() => {
+      jest.advanceTimersByTime(2000);
+    });
+
+    const minusTime = screen.queryByText(-1);
+    expect(minusTime).not.toBeInTheDocument();
+    expect(time).toBeInTheDocument();
+
+    jest.useRealTimers();
+  });
+});

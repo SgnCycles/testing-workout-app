@@ -1,9 +1,11 @@
+// Added footer test
+
 import { render, screen } from "@testing-library/react";
-import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 describe("The header works ok", () => {
   test("The header is an H1 and has specific text", () => {
-    render(<Header />);
+    render(<Footer />);
 
     const headerTitle = screen.getByRole("heading", {
       level: 1,

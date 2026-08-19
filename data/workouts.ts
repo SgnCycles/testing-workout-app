@@ -1,4 +1,4 @@
-import { Workout } from '../types/workout'
+import { Workout } from "../types/workout";
 
 export const workouts: Workout[] = [
   {
@@ -20,15 +20,15 @@ export const workouts: Workout[] = [
     id: 4,
     name: "Jumping Jacks",
     workTime: 30,
-  }, 
-    {
+  },
+  {
     id: 5,
     name: "Deadbug",
     workTime: 60,
-  }, 
-    {
+  },
+  {
     id: 6,
     name: "Plank",
     workTime: 45,
   },
-]
+];
