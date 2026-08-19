@@ -36,7 +36,6 @@ describe("The workout card works ", () => {
     render(<WorkoutCard handleClick={mockFunction} workout={mockWorkout} />);
     const button = screen.getByRole("button", { name: /start workout/i });
     fireEvent.click(button);
-    console.log(mockFunction.mock.calls);
     expect(mockFunction).toHaveBeenCalled();
     expect(mockFunction).toHaveBeenCalledWith(mockWorkout);
   });

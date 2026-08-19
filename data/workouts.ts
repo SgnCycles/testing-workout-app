@@ -5,6 +5,7 @@ export const workouts: Workout[] = [
     id: 1,
     name: "Sit Ups",
     workTime: 60,
+    //  workTime: 5,
   },
   {
     id: 2,

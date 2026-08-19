@@ -1,8 +1,10 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+// import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, act } from "@testing-library/react";
 import Timer from "@/components/Timer";
-import { act } from "react";
+// import { act } from "react";
 
 describe("The timer works", () => {
+
   test("The start button and starttime shows", () => {
     render(<Timer startTime={10} />);
     const startButton = screen.getByRole("button", { name: /start/i });
@@ -11,6 +13,7 @@ describe("The timer works", () => {
     expect(initialTime).toBeInTheDocument();
   });
 
+  // this did not make sense, why Let's go is a button? //
   test("Start changes to LETS GO when clicked", () => {
     render(<Timer startTime={10} />);
     const startButton = screen.getByRole("button", { name: /start/i });
@@ -19,6 +22,7 @@ describe("The timer works", () => {
     expect(startButton).toHaveTextContent(/lets go/i);
   });
 
+  //shouldn't there be the old value stored?
   test("Timer counts down correctly", () => {
     jest.useFakeTimers();
     render(<Timer startTime={10} />);
@@ -44,8 +48,8 @@ describe("The timer works", () => {
     });
     victoryMessage = screen.getByText(/you did it/i);
     expect(victoryMessage).toBeInTheDocument();
-
-    // Resetbutton
+    
+    //Resetbutton
     const resetButton = screen.getByRole("button", { name: /reset/i });
     fireEvent.click(resetButton);
     victoryMessage = screen.queryByText(/you did it/i);
@@ -60,6 +64,7 @@ describe("The timer works", () => {
   test("The timer does not count below 0", () => {
     jest.useFakeTimers();
     render(<Timer startTime={1} />);
+    //const instead of let?
     let startButton = screen.getByRole("button", { name: /start/i });
     fireEvent.click(startButton);
     act(() => {

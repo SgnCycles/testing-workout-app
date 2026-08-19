@@ -3,7 +3,7 @@ import Timer from "../Timer";
 
 const ActiveWorkout = ({workout, goBack}: ActiveWorkoutProps) => {
   return (
-    <div>
+    <div className="bg-blue-800">
       <div>
         <button onClick={goBack}>Go Back</button>
       </div>
