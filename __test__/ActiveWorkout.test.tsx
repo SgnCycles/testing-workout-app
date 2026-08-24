@@ -3,7 +3,7 @@ import ActiveWorkout from "@/components/ActiveWorkout";
 
 describe("The ActiveWorkout works ok", () => {
   
-  const mockWorkout = { id: 1, name: "This is a mock workout", workTime: 10 };
+  const mockWorkout = { id: 1, name: "This is a mock workout", workTime: 10, image: "mockImage.png" };
   const mockFunction = jest.fn();
 
   test("Renders the correct name of the chosen workout", () => {

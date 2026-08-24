@@ -22,6 +22,18 @@ describe("The timer works", () => {
     expect(startButton).toHaveTextContent(/lets go/i);
   });
 
+  // my test for the above:
+    test("text 'LETS GO' appears when the start button is clicked", () => {
+    render(<Timer startTime={10} />);
+    const startButton = screen.getByRole("button", { name: /start/i });
+    fireEvent.click(startButton);
+    expect(screen.queryByRole("button", {name: /start/i})).not.toBeInTheDocument();
+    const cheerText = screen.getByTestId("cheer")
+    expect(cheerText).toBeInTheDocument();
+  });
+
+  //test ends
+
   //shouldn't there be the old value stored?
   test("Timer counts down correctly", () => {
     jest.useFakeTimers();
@@ -64,7 +76,6 @@ describe("The timer works", () => {
   test("The timer does not count below 0", () => {
     jest.useFakeTimers();
     render(<Timer startTime={1} />);
-    //const instead of let?
     let startButton = screen.getByRole("button", { name: /start/i });
     fireEvent.click(startButton);
     act(() => {

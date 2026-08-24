@@ -2,7 +2,8 @@ export interface Workout {
   id: number;
   name: string;
   workTime: number;
-};
+  image: string;
+}
 
 export type WorkoutCardProps = {
   workout: Workout;

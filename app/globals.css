@@ -3,3 +3,47 @@
 * {
   box-sizing: border-box;
 }
+
+html {
+  height: 100dvh;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+@theme {
+  --font-anton: var(--font-anton);
+  --font-oswald: var(--font-oswald);
+  --font-work-sans: var(--font-work-sans);
+  --color-heading: #ffffff;
+  --color-text: #ffffff;
+  --color-background: #f5793a;
+  --color-background-card: #2f4858;
+  --color-text-card-primary: #bdb6ba;
+  --color-text-card-secondary: #cd8439;
+  --color-background-button: #c68226;
+  /* --color-background-button-border: #D3D16A; */
+  /* --color-buttons: #FEFEFB; */
+  /* --color-background-button-hover: #D3D16A;
+  --color-buttons-hover: #050D1A; */
+  /* --color-background-scoreboard: rgba(5,13,26, 0.8);
+  --color-border-scoreboard: rgba(15,46,64, 0.8); */
+}
+
+.workout-grid {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  grid-template-columns: repeat(3, minmax(300px, 500px));
+  grid-auto-rows: 220px;
+  gap: 15px;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+
+  .workout-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}

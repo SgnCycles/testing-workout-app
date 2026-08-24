@@ -3,7 +3,7 @@ import WorkoutCard from "@/components/WorkoutCard";
 
 describe("The workout card works ", () => {
   const mockFunction = jest.fn();
-  const mockWorkout = { id: 1, name: "this is a mock name", workTime: 10 };
+  const mockWorkout = { id: 1, name: "this is a mock name", workTime: 10, image: "mockImage.png" };
 
   test("Renders the workoutCard", () => {
     render(<WorkoutCard handleClick={mockFunction} workout={mockWorkout} />);
