@@ -8,30 +8,30 @@ import { Workout } from "@/types/workout";
 import { gsap, Flip } from "@/utils/gsap";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(useGSAP);
-
 export default function Home() {
+
+  gsap.registerPlugin(useGSAP);
 
   const [startWorkout, setStartWorkout] = useState<boolean>(false);
   const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
-  const cardState = useRef<Flip.FlipState | null>(null);
+  const cardStateRef = useRef<Flip.FlipState | null>(null);
 
   const handleStartClick = (workout: Workout): void => {
-    cardState.current = Flip.getState(".workout-card-title, .workout-image");
+    cardStateRef.current = Flip.getState(".workout-card-title, .workout-image, .workout-card");
     setStartWorkout(true);
     setSelectedWorkout(workout);
   };
 
   useGSAP(
     () => {
-      if (!cardState.current) return;
+      if (!cardStateRef.current) return;
       if (startWorkout) {
-        Flip.from(cardState.current, {
-          targets: ".workout-card-title, .workout-image",
-          duration: 0.5,
-          ease: "power2.in",
+        Flip.from(cardStateRef.current, {
+          targets: ".workout-card-title, .workout-image, .workout-card",
+          duration: 0.8,
+          ease: "power1.in",
         });
-      }
+      };
     },
     { dependencies: [startWorkout] },
   );
@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      {!startWorkout && <WorkoutSelection handleClick={handleStartClick} />}
+      {!startWorkout && <WorkoutSelection handleClick={handleStartClick}/>}
       {startWorkout && selectedWorkout && (
         <ActiveWorkout workout={selectedWorkout} goBack={handleGoBackClick} />
       )}

@@ -21,9 +21,9 @@ const Header = () => {
   );
 
   return (
-    <header className="w-full min-h-[10%] pt-8 pl-8" ref={headingRef}>
+    <header className="w-full min-h-[10%] pb-4 md:pb-8 p-8" ref={headingRef}>
       <h1
-        className="font-anton text-heading text-7xl md:text-[150px] text-shadow-lg opacity-0"
+        className="font-anton text-heading text-5xl md:text-[6rem] text-shadow-lg opacity-0 text-center md:text-start"
         id="heading"
       >
         Workout Timer

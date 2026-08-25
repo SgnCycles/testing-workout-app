@@ -33,7 +33,7 @@ const WorkoutSelection = ({ handleClick }: WorkoutSelectionProps) => {
 
   return (
     <main className="h-auto md:h-full flex flex-col grow justify-evenly">
-      <h2 className="text-end font-oswald text-[#161114] text-xl w-[95%]">
+      <h2 className="text-end font-oswald text-[#161114] text-xl w-[95%] pb-4">
         Choose your workout
       </h2>
       <div

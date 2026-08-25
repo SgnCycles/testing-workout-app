@@ -1,4 +1,4 @@
-export interface Workout {
+export type Workout = {
   id: number;
   name: string;
   workTime: number;
