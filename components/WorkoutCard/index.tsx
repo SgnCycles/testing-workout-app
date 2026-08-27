@@ -1,5 +1,4 @@
 import { WorkoutCardProps } from "@/types/workout";
-import Image from "next/image";
 
 const WorkoutCard = ({ workout, handleClick }: WorkoutCardProps) => {
   
@@ -33,7 +32,7 @@ const WorkoutCard = ({ workout, handleClick }: WorkoutCardProps) => {
         </button>
       </div>
       <div className="absolute right-0 bottom-0 z-20">
-        <Image
+        <img
           className="rounded-xl workout-image"
           src={`/images/${workout.image}`}
           alt="workout"

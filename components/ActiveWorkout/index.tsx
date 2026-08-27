@@ -3,9 +3,9 @@ import Timer from "../Timer";
 import { gsap, SplitText } from "@/utils/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
-import Image from "next/image";
 
 const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
+
   const activeWorkoutCardRef = useRef<HTMLDivElement | null>(null);
   const homeButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -22,9 +22,9 @@ const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
           {
             opacity: 1,
             y: 0,
-            delay: 0.5,
+            delay: 0.8,
             stagger: 0.1,
-            duration: 0.5,
+            duration: 0.8,
             ease: "power2.out",
           },
         );
@@ -84,36 +84,38 @@ const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
   );
 
   return (
-    <div
-      className="bg-background-card flex flex-col justify-between grow relative workout-card"
-      ref={activeWorkoutCardRef}
-      data-flip-id={`card-${workout.id}`}
-    >
-      <h3
-        data-flip-id={`heading-${workout.id}`}
-        className="workout-card-title font-oswald text-6xl text-text-card-primary pl-8 pt-8 text-nowrap workout-card-title"
+    <div className="flex grow">
+      <div
+        className="bg-background-card flex flex-col justify-between relative w-full workout-card"
+        ref={activeWorkoutCardRef}
+        data-flip-id={`card-${workout.id}`}
       >
-        {workout.name}
-      </h3>
-      <div className="flex justify-center items-center active-workout-element">
-        <Timer startTime={workout.workTime} />
-      </div>
-      <button
-        onClick={goBack}
-        className="home-button active-workout-element cursor-pointer ml-8 mb-4 w-25 text-center text-lg font-semibold text-heading"
-        ref={homeButtonRef}
-      >
-        Go Back
-      </button>
-      <div className="absolute right-0 xs:top-0 md:bottom-0 z-20 rounded-xl w-[30%] h-auto flex justify-end">
-        <Image
-          className="rounded-xl workout-image object-cover w-full h-auto pt-5 pr-5"
-          src={`/images/${workout.image}`}
-          alt="workout"
-          width={350}
-          height={390}
-          data-flip-id={`image-${workout.id}`}
-        />
+        <h3
+          data-flip-id={`heading-${workout.id}`}
+          className="workout-card-title font-oswald text-6xl text-text-card-primary pl-8 pt-8 text-nowrap workout-card-title"
+        >
+          {workout.name}
+        </h3>
+        <div className="flex justify-center items-center active-workout-element">
+          <Timer startTime={workout.workTime} />
+        </div>
+        <button
+          onClick={goBack}
+          className="home-button active-workout-element cursor-pointer ml-8 mb-4 w-25 text-center text-lg font-semibold text-heading"
+          ref={homeButtonRef}
+        >
+          Go Back
+        </button>
+        <div className="absolute right-0 xs:top-0 md:bottom-0 z-20 rounded-xl w-[30%] h-auto flex justify-end">
+          <img
+            className="rounded-xl workout-image object-cover w-full h-auto pt-5 pr-5"
+            src={`/images/${workout.image}`}
+            alt="workout"
+            width={350}
+            height={390}
+            data-flip-id={`image-${workout.id}`}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-// Added footer test
+// MY TEST cause I created Footer component
 import { render, screen } from "@testing-library/react";
 import Footer from "@/components/Footer";
 

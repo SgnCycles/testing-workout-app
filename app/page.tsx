@@ -9,7 +9,6 @@ import { gsap, Flip } from "@/utils/gsap";
 import { useGSAP } from "@gsap/react";
 
 export default function Home() {
-
   gsap.registerPlugin(useGSAP);
 
   const [startWorkout, setStartWorkout] = useState<boolean>(false);
@@ -17,7 +16,9 @@ export default function Home() {
   const cardStateRef = useRef<Flip.FlipState | null>(null);
 
   const handleStartClick = (workout: Workout): void => {
-    cardStateRef.current = Flip.getState(".workout-card-title, .workout-image, .workout-card");
+    cardStateRef.current = Flip.getState(
+      ".workout-card-title, .workout-image, .workout-card",
+    );
     setStartWorkout(true);
     setSelectedWorkout(workout);
   };
@@ -25,15 +26,27 @@ export default function Home() {
   useGSAP(
     () => {
       if (!cardStateRef.current) return;
+      const flipTimeline = gsap.timeline();
       if (startWorkout) {
-        Flip.from(cardStateRef.current, {
-          targets: ".workout-card-title, .workout-image, .workout-card",
-          duration: 0.8,
-          ease: "power1.in",
+        gsap.set(".workout-card", {
+          borderRadius: "16px",
         });
-      };
+        flipTimeline.add(
+          Flip.from(cardStateRef.current, {
+            targets: ".workout-card-title, .workout-image, .workout-card",
+            duration: 0.8,
+            ease: "power1.in",
+            onComplete: () => {
+              gsap.to(".workout-card", {
+                borderRadius: "0",
+                duration: 0.5,
+              });
+            },
+          }),
+        );
+      }
     },
-    { dependencies: [startWorkout] },
+    { dependencies: [startWorkout, selectedWorkout] },
   );
 
   const handleGoBackClick = (): void => {
@@ -44,7 +57,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      {!startWorkout && <WorkoutSelection handleClick={handleStartClick}/>}
+      {!startWorkout && <WorkoutSelection handleClick={handleStartClick} />}
       {startWorkout && selectedWorkout && (
         <ActiveWorkout workout={selectedWorkout} goBack={handleGoBackClick} />
       )}

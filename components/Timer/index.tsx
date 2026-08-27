@@ -2,11 +2,15 @@
 import { TimerProps } from "@/types/workout";
 import { useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import useSound from "use-sound";
 
 const Timer = ({ startTime }: TimerProps) => {
   const [workout, setWorkout] = useState<boolean>(false);
   const [workoutCompleted, setWorkoutCompleted] = useState<boolean>(false);
   const [key, setKey] = useState<number>(0);
+  const [playTimer] = useSound("./sounds/countdown_sound_v1.mp3", {
+    volume: 0.9,
+  });
 
   const handleClick = () => {
     setWorkout(true);
@@ -35,6 +39,11 @@ const Timer = ({ startTime }: TimerProps) => {
         onComplete={timerCompleted}
         size={340}
         trailColor="#2F4858"
+        onUpdate={(remainingTime) => {
+          if (remainingTime === 9) {
+            playTimer();
+          }
+        }}
       >
         {({ remainingTime }) => (
           <span
@@ -51,7 +60,7 @@ const Timer = ({ startTime }: TimerProps) => {
         {!workout && !workoutCompleted && (
           <button
             onClick={handleClick}
-            className="start-button text-2xl font-oswald text-text text-heading cursor-pointer ml-auto hover:tracking-widest"
+            className="start-button text-2xl font-oswald text-text text-heading cursor-pointer ml-auto hover:tracking-widest hover:text-[#fbe282]"
           >
             Start
           </button>
@@ -65,7 +74,10 @@ const Timer = ({ startTime }: TimerProps) => {
           </p>
         )}
         {workoutCompleted && (
-          <p className="text-2xl font-oswald text-text text-heading">
+          <p
+            className="text-2xl font-oswald text-text text-heading"
+            data-testid="victory-message"
+          >
             You did it!
           </p>
         )}
