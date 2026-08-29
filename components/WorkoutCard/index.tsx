@@ -1,7 +1,6 @@
-import { WorkoutCardProps } from "@/types/workout";
+import { WorkoutCardProps } from "@/types/types";
 
 const WorkoutCard = ({ workout, handleClick }: WorkoutCardProps) => {
-  
   return (
     <div
       data-testid="workout-card"
@@ -10,7 +9,7 @@ const WorkoutCard = ({ workout, handleClick }: WorkoutCardProps) => {
     >
       <div className="flex flex-col justify-around items-start h-full pl-4">
         <h3
-          className="font-oswald text-6xl text-text-card-primary workout-card-title"
+          className="font-oswald text-5xl md:text-6xl text-text-card-primary workout-card-title"
           data-flip-id={`heading-${workout.id}`}
         >
           {workout.name}
@@ -39,6 +38,7 @@ const WorkoutCard = ({ workout, handleClick }: WorkoutCardProps) => {
           width={160}
           height={100}
           data-flip-id={`image-${workout.id}`}
+          loading="lazy"
         />
       </div>
     </div>

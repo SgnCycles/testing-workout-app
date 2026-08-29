@@ -1,4 +1,4 @@
-import { ActiveWorkoutProps } from "@/types/workout";
+import { ActiveWorkoutProps } from "@/types/types";
 import Timer from "../Timer";
 import { gsap, SplitText } from "@/utils/gsap";
 import { useGSAP } from "@gsap/react";
@@ -38,11 +38,9 @@ const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
       document.fonts.ready.then(() => {
         const button = homeButtonRef.current;
         if (!button) return;
-
         const split = SplitText.create(".home-button", {
           type: "words",
         });
-
         const handleHover = () => {
           gsap.fromTo(
             split.words,
@@ -60,7 +58,6 @@ const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
             },
           );
         };
-
         const handleLeave = () => {
           gsap.to(split.words, {
             color: "#ffffff",
@@ -69,10 +66,8 @@ const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
             ease: "power2.out",
           });
         };
-
         button.addEventListener("mouseenter", handleHover);
         button.addEventListener("mouseleave", handleLeave);
-
         return () => {
           button.removeEventListener("mouseenter", handleHover);
           button.removeEventListener("mouseleave", handleLeave);
@@ -84,7 +79,7 @@ const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
   );
 
   return (
-    <div className="flex grow">
+    <div className="flex grow mb-10">
       <div
         className="bg-background-card flex flex-col justify-between relative w-full workout-card"
         ref={activeWorkoutCardRef}

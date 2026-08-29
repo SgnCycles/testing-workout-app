@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import WorkoutCard from "@/components/WorkoutCard";
 
 describe("The workout card works", () => {
+  
   const mockFunction = jest.fn();
   const mockWorkout = { id: 1, name: "this is a mock name", workTime: 10, image: "mockImage.png" };
 

@@ -2,7 +2,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "../app/page";
 
 describe("the homepage works ok", () => {
-  
   test("Header an WorkoutSelection is rendered on homepage", () => {
     render(<Home />);
     const header = screen.getByRole("heading", {
@@ -19,16 +18,12 @@ describe("the homepage works ok", () => {
 
   test("Switches to ActiveWorkout when a workout is selected", () => {
     render(<Home />);
-    //this is because the Homescreen produces 6 start buttons for each of the cards
     const startWorkoutButton = screen.getAllByRole("button", {
       name: /start workout/i,
     });
-    fireEvent.click(startWorkoutButton[0]); // put 3 to check if this really works, cause at least once the first button may be rendered
-    //I would select buy role or dataId to make sure the intended button is selected
+    fireEvent.click(startWorkoutButton[0]);
     const goBackButton = screen.getByText(/go back/i);
     expect(goBackButton).toBeInTheDocument();
-
-    //shouldn't there be rechecking and using"queryByRole" to test if smth is not in the document?
     expect(startWorkoutButton[0]).not.toBeInTheDocument();
     const workoutTitle = screen.queryByRole("heading", {
       level: 2,
@@ -37,14 +32,32 @@ describe("the homepage works ok", () => {
     expect(workoutTitle).not.toBeInTheDocument();
   });
 
-  //I think this test is way too complicated for what it tests
+  //ADDING MY TEST
+  test("Switches to ActiveWorkout when a workout is selected", () => {
+    render(<Home />);
+    const startWorkoutButtons = screen.getAllByRole("button", {
+      name: /start workout/i,
+    });
+    fireEvent.click(startWorkoutButtons[3]);
+    const goBackButton = screen.getByRole("button", { name: /go back/i });
+    expect(goBackButton).toBeInTheDocument();
+    const startWorkoutButton = screen.queryByRole("button", {
+      name: /start workout/i,
+    });
+    expect(startWorkoutButton).not.toBeInTheDocument();
+    const workoutTitle = screen.queryByRole("heading", {
+      level: 2,
+      name: /choose your workout/i,
+    });
+    expect(workoutTitle).not.toBeInTheDocument();
+  });
+
   test("returns to WorkoutSelection when goBack is clicked from ActiveWorkout", () => {
     render(<Home />);
-    //isn't there only one button for this? getAll feels unnecessary
     let startWorkoutButton = screen.getAllByRole("button", {
       name: /start workout/i,
     });
-    fireEvent.click(startWorkoutButton[0]); // Rob would test and click the third one to test i9f there are more than one
+    fireEvent.click(startWorkoutButton[0]);
     let goBackButton = screen.getByText(/go back/i);
     expect(goBackButton).toBeInTheDocument();
     fireEvent.click(goBackButton);
@@ -53,5 +66,23 @@ describe("the homepage works ok", () => {
       name: /start workout/i,
     });
     expect(startWorkoutButton[0]).toBeInTheDocument();
+  });
+
+  //ADDING MY TEST
+  test("returns to WorkoutSelection when goBack is clicked from ActiveWorkout", () => {
+    render(<Home />);
+    let startWorkoutButton = screen.getAllByRole("button", {
+      name: /start workout/i,
+    });
+    fireEvent.click(startWorkoutButton[3]);
+    const goBackButton = screen.getByRole("button", { name: /go back/i });
+    expect(goBackButton).toBeInTheDocument();
+    fireEvent.click(goBackButton);
+    screen.queryByRole("button", { name: /go back/i }),
+    expect(screen.queryByRole("button", { name: /go back/i })).not.toBeInTheDocument();
+    startWorkoutButton = screen.getAllByRole("button", {
+      name: /start workout/i,
+    });
+    expect(startWorkoutButton[3]).toBeInTheDocument();
   });
 });

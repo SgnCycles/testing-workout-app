@@ -22,7 +22,7 @@ const work_sans = Work_Sans({
 
 export const metadata: Metadata = {
   title: "Get moving",
-  description: "Choose the workout that suites you best",
+  description: "Choose the workout that suits you best",
   icons: {
     icon: "/images/favicon.png",
   },
@@ -32,9 +32,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${oswald.variable} ${work_sans.variable} antialiased`}
+      className={`${anton.variable} ${oswald.variable} ${work_sans.variable} antialiased h-dvh`}
     >
-      <body className="bg-background">{children}</body>
+      <body className="bg-background h-full m-0">{children}</body>
     </html>
   );
 }

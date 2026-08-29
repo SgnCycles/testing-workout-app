@@ -1,24 +1,17 @@
-# Proposal:
+# FG - Webb application development - Assignment - Automated Testing - Test Driven Development#
 
-## Workout timer
+## Introduction ##
+For this school assignment I have built a SPA React website to test my knowledge of TDD and converting tests into a working application.
+The topic of the website is a Workout app, offering the user six workouts with a timer included to control the workout time.
 
-On homepage, choose between workouts. 
-When clicked "start workout" the workout shows (activeWorkout) with a timer. 
-click start to start the countdown timer.
+## Live Demo ##
+Check out my [website](https://testing-workout-app.vercel.app/).
 
-When started, the button changes text to "lets go"!
-
-When workout is completed, timer is 0 and a text with "you did it" shows up, and a reset button. 
-
-Click the reset button to go back to initial timer countdown. Click start to do the workout again again. 
-
-Click the "go back" button to go back to the homepage, with all the workout selections. 
-
-
-![homepage](public/images/home.png)
----
-![timer](public/images/counting.png)
----
-![started counting](public/images/timer.png)
----
-![timer ends](public/images/victory.png)
+## Tech Stack ##
+- HTML5
+- CSS
+- Vanilla Javascript
+- React
+- Tailwind
+- NextJs
+- Jest

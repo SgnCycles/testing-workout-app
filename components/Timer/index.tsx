@@ -1,19 +1,26 @@
 "use client";
-import { TimerProps } from "@/types/workout";
+import { TimerProps } from "@/types/types";
 import { useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import useSound from "use-sound";
+import { useMediaQuery } from "usehooks-ts";
 
 const Timer = ({ startTime }: TimerProps) => {
+  
   const [workout, setWorkout] = useState<boolean>(false);
   const [workoutCompleted, setWorkoutCompleted] = useState<boolean>(false);
   const [key, setKey] = useState<number>(0);
   const [playTimer] = useSound("./sounds/countdown_sound_v1.mp3", {
     volume: 0.9,
   });
+  const [playLetsGo] = useSound("./sounds/lets_go.mp3", {
+    volume: 0.9,
+  });
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const handleClick = () => {
     setWorkout(true);
+    playLetsGo();
     setWorkoutCompleted(false);
   };
 
@@ -37,7 +44,7 @@ const Timer = ({ startTime }: TimerProps) => {
         colors={["#4C956C", "#FBE282", "#F5793A", "#D64545"]}
         colorsTime={[30, 20, 10, 0]}
         onComplete={timerCompleted}
-        size={340}
+        size={isDesktop ? 340 : 240}
         trailColor="#2F4858"
         onUpdate={(remainingTime) => {
           if (remainingTime === 9) {
@@ -47,7 +54,7 @@ const Timer = ({ startTime }: TimerProps) => {
       >
         {({ remainingTime }) => (
           <span
-            className="text-[13rem] font-oswald text-text text-heading"
+            className="text-[9rem] font-oswald text-text text-heading"
             data-testid="timer"
             role="timer"
             aria-live="assertive"

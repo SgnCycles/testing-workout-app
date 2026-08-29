@@ -1,7 +1,7 @@
 "use client";
 import { workouts } from "@/data/workouts";
 import WorkoutCard from "@/components/WorkoutCard";
-import { WorkoutSelectionProps } from "@/types/workout";
+import { WorkoutSelectionProps } from "@/types/types";
 import { gsap } from "@/utils/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
@@ -32,13 +32,13 @@ const WorkoutSelection = ({ handleClick }: WorkoutSelectionProps) => {
   );
 
   return (
-    <main className="h-auto md:h-full flex flex-col grow justify-evenly">
+    <div className="h-auto md:h-full flex flex-col mb-8 items-center">
       <h2 className="text-end font-oswald text-[#161114] text-xl w-[95%] pb-4">
         Choose your workout
       </h2>
       <div
         data-testid="workout-selection"
-        className="workout-grid w-[90%] m-auto"
+        className="workout-grid w-[90%] flex justify-center"
         ref={workoutCardContainerRef}
       >
         {workouts &&
@@ -50,7 +50,7 @@ const WorkoutSelection = ({ handleClick }: WorkoutSelectionProps) => {
             />
           ))}
       </div>
-    </main>
+    </div>
   );
 };
 

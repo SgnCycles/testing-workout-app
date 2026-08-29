@@ -21,7 +21,8 @@
     "react-countdown-circle-timer": "^3.2.1",
     "react-dom": "19.2.8",
     "ts-node": "^10.9.2",
-    "use-sound": "^5.0.0"
+    "use-sound": "^5.0.0",
+    "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

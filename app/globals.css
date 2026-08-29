@@ -4,21 +4,13 @@
   box-sizing: border-box;
 }
 
-html {
-  height: 100dvh;
-}
-
-body {
-  height: 100%;
-  margin: 0;
-}
-
 @theme {
   --font-anton: var(--font-anton);
   --font-oswald: var(--font-oswald);
   --font-work-sans: var(--font-work-sans);
   --color-heading: #ffffff;
   --color-background: #f5793a;
+  --color-background-transparent: rgba(245, 121, 58, 0.4);
   --color-background-card: #2f4858;
   --color-text-card-primary: #e8f1f2;
   --color-text-card-secondary: #cd8439;
@@ -29,7 +21,7 @@ body {
 .workout-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
-  grid-auto-rows: 260px;
+  grid-auto-rows: 240px;
   gap: 15px;
   justify-content: center;
 }
@@ -70,7 +62,8 @@ body {
   left: 16px;
 }
 
-.start-button, .restart-button {
+.start-button,
+.restart-button {
   transition: 0.5s linear;
 }
 
