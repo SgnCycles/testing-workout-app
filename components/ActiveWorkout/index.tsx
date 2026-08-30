@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
 const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
-
+  
   const activeWorkoutCardRef = useRef<HTMLDivElement | null>(null);
   const homeButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -81,13 +81,13 @@ const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
   return (
     <div className="flex grow mb-10">
       <div
-        className="bg-background-card flex flex-col justify-between relative w-full workout-card"
+        className="relative w-full bg-background-card flex flex-col justify-between md:mt-8 workout-card"
         ref={activeWorkoutCardRef}
         data-flip-id={`card-${workout.id}`}
       >
         <h3
+          className="font-oswald text-6xl text-text-card-primary pl-8 pt-8 text-nowrap workout-card-title"
           data-flip-id={`heading-${workout.id}`}
-          className="workout-card-title font-oswald text-6xl text-text-card-primary pl-8 pt-8 text-nowrap workout-card-title"
         >
           {workout.name}
         </h3>
@@ -96,16 +96,16 @@ const ActiveWorkout = ({ workout, goBack }: ActiveWorkoutProps) => {
         </div>
         <button
           onClick={goBack}
-          className="home-button active-workout-element cursor-pointer ml-8 mb-4 w-25 text-center text-lg font-semibold text-heading"
+          className="text-heading text-center text-lg font-semibold cursor-pointer ml-8 mb-4 w-25 home-button active-workout-element"
           ref={homeButtonRef}
         >
           Go Back
         </button>
-        <div className="absolute right-0 xs:top-0 md:bottom-0 z-20 rounded-xl w-[30%] h-auto flex justify-end">
+        <div className="absolute h-auto w-[30%] flex justify-end right-0 xs:top-0 md:bottom-0 z-20 rounded-xl">
           <img
-            className="rounded-xl workout-image object-cover w-full h-auto pt-5 pr-5"
+            className="w-full h-auto rounded-xl object-cover pt-5 pr-5 workout-image"
             src={`/images/${workout.image}`}
-            alt="workout"
+            alt={`${workout.name} workout`}
             width={350}
             height={390}
             data-flip-id={`image-${workout.id}`}

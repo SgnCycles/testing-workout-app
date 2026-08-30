@@ -3,6 +3,7 @@ import WorkoutSelection from "@/components/WorkoutSelection";
 import { workouts } from "@/data/workouts";
 
 describe("The workout selection works ok", () => {
+  
   test("The subtitle should render correctly with an h2 and specific text", () => {
     const mockFunction = jest.fn();
     render(<WorkoutSelection handleClick={mockFunction} />);
@@ -29,5 +30,15 @@ describe("The workout selection works ok", () => {
     expect(workoutSelection).toBeInTheDocument();
     const workoutCard = within(workoutSelection).getAllByTestId("workout-card");
     expect(workoutCard[0]).toHaveTextContent(workouts[0].name);
+  });
+
+  //ADDING MY TEST
+  test("The correct workout is displayed", () => {
+    const mockFunction = jest.fn();
+    render(<WorkoutSelection handleClick={mockFunction} />);
+    const workoutSelection = screen.getByTestId("workout-selection");
+    expect(workoutSelection).toBeInTheDocument();
+    const workoutCard = within(workoutSelection).getAllByTestId("workout-card");
+    expect(workoutCard[3]).toHaveTextContent(workouts[3].name);
   });
 });

@@ -32,28 +32,25 @@ export default function Home() {
       requestAnimationFrame(() => {
         window.scrollTo(0, scrollYRef.current);
       });
-      const flipTimeline = gsap.timeline();
       if (startWorkout) {
         gsap.set(".workout-card", {
           borderRadius: "16px",
           y: 0,
         });
       }
-      flipTimeline.add(
-        Flip.from(cardStateRef.current, {
-          targets: ".workout-card-title, .workout-image, .workout-card",
-          duration: 0.8,
-          ease: "power1.in",
-          onComplete: () => {
-            gsap.to(".workout-card", {
-              borderRadius: "0",
-              duration: 0.5,
-            });
-          },
-        }),
-      );
+      Flip.from(cardStateRef.current, {
+        targets: ".workout-card-title, .workout-image, .workout-card",
+        duration: 0.8,
+        ease: "power1.in",
+        onComplete: () => {
+          gsap.to(".workout-card", {
+            borderRadius: "0",
+            duration: 0.5,
+          });
+        },
+      });
     },
-    { dependencies: [startWorkout, selectedWorkout] },
+    { dependencies: [startWorkout] },
   );
 
   const handleGoBackClick = (): void => {

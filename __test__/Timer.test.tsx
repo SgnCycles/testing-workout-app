@@ -8,6 +8,7 @@ import {
 import Timer from "@/components/Timer";
 
 describe("The timer works", () => {
+
   beforeEach(() => {
     jest.useFakeTimers();
   });
@@ -53,7 +54,7 @@ describe("The timer works", () => {
     ).not.toBeInTheDocument();
     const cheerText = screen.getByTestId("cheer");
     expect(cheerText).toBeInTheDocument();
-     expect(cheerText).toHaveTextContent(/lets go/i);
+    expect(cheerText).toHaveTextContent(/lets go/i);
   });
 
   test("Timer counts down correctly", () => {
@@ -145,7 +146,7 @@ describe("The timer works", () => {
     expect(time).toBeInTheDocument();
   });
 
-  //MY TEST
+  //ADDING MY TEST
   test("The timer does not count below 0", async () => {
     render(<Timer startTime={1} />);
     let startButton = screen.getByRole("button", { name: /start/i });

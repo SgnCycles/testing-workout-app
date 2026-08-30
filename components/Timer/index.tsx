@@ -6,7 +6,6 @@ import useSound from "use-sound";
 import { useMediaQuery } from "usehooks-ts";
 
 const Timer = ({ startTime }: TimerProps) => {
-  
   const [workout, setWorkout] = useState<boolean>(false);
   const [workoutCompleted, setWorkoutCompleted] = useState<boolean>(false);
   const [key, setKey] = useState<number>(0);
@@ -91,7 +90,7 @@ const Timer = ({ startTime }: TimerProps) => {
         {workoutCompleted && (
           <button
             onClick={handleReset}
-            className="restart-button text-2xl font-oswald text-text text-heading cursor-pointer hover:tracking-widest"
+            className="restart-button text-2xl font-oswald text-text text-heading cursor-pointer hover:tracking-widest hover:text-[#fbe282]"
           >
             Reset
           </button>

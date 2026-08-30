@@ -25,6 +25,15 @@ describe("The ActiveWorkout works ok", () => {
     expect(chosenWorkoutName).toHaveTextContent(mockWorkout.name);
   });
 
+  //ADDING MY TEST
+  test("Renders the correct image with the correct src and alt of the chosen workout", () => {
+    render(<ActiveWorkout workout={mockWorkout} goBack={mockFunction} />);
+    const chosenWorkoutImage = screen.getByRole("img");
+    expect(chosenWorkoutImage).toBeInTheDocument();
+    expect(chosenWorkoutImage.getAttribute("src")).toBe(`/images/${mockWorkout.image}`)
+    expect(chosenWorkoutImage.getAttribute("alt")).toBe(`${mockWorkout.name} workout`)
+  });
+
   test("calls goback function when goback button is clicked", () => {
     render(<ActiveWorkout workout={mockWorkout} goBack={mockFunction} />);
     let goBack = screen.getByRole("button", { name: /go back/i });

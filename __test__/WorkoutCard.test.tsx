@@ -4,7 +4,12 @@ import WorkoutCard from "@/components/WorkoutCard";
 describe("The workout card works", () => {
   
   const mockFunction = jest.fn();
-  const mockWorkout = { id: 1, name: "this is a mock name", workTime: 10, image: "mockImage.png" };
+  const mockWorkout = {
+    id: 1,
+    name: "this is a mock name",
+    workTime: 10,
+    image: "mockImage.png",
+  };
 
   test("Renders the workoutCard", () => {
     render(<WorkoutCard handleClick={mockFunction} workout={mockWorkout} />);
@@ -21,6 +26,16 @@ describe("The workout card works", () => {
     expect(cardTitle).toBeInTheDocument();
   });
 
+  //ADDING MY TEST (with appropriate description)
+  test("Workout card should have a title name with h3", () => {
+    render(<WorkoutCard handleClick={mockFunction} workout={mockWorkout} />);
+    const cardTitle = screen.getByRole("heading", {
+      level: 3,
+      name: mockWorkout.name,
+    });
+    expect(cardTitle).toBeInTheDocument();
+  });
+
   test("The seconds for the workout are shown", () => {
     render(<WorkoutCard handleClick={mockFunction} workout={mockWorkout} />);
     const seconds = screen.getByTestId("workout-time");
@@ -28,12 +43,31 @@ describe("The workout card works", () => {
       `Work time: ${mockWorkout.workTime} seconds`,
     );
   });
+
+  //ADDING MY TEST (with appropriate description)
+  test("The length in seconds for the workout are shown in the Workout card", () => {
+    render(<WorkoutCard handleClick={mockFunction} workout={mockWorkout} />);
+    const seconds = screen.getByTestId("workout-time");
+    expect(seconds).toHaveTextContent(
+      `Work time: ${mockWorkout.workTime} seconds`,
+    );
+  });
+
   test("The handleClick is not called before the button is clicked", () => {
     render(<WorkoutCard handleClick={mockFunction} workout={mockWorkout} />);
     expect(mockFunction).not.toHaveBeenCalled();
   });
 
   test("The button calls the function when clicked", () => {
+    render(<WorkoutCard handleClick={mockFunction} workout={mockWorkout} />);
+    const button = screen.getByRole("button", { name: /start workout/i });
+    fireEvent.click(button);
+    expect(mockFunction).toHaveBeenCalled();
+    expect(mockFunction).toHaveBeenCalledWith(mockWorkout);
+  });
+
+  //ADDING MY TEST (with appropriate description)
+  test("The 'Start Workout' button calls the start workout function when clicked", () => {
     render(<WorkoutCard handleClick={mockFunction} workout={mockWorkout} />);
     const button = screen.getByRole("button", { name: /start workout/i });
     fireEvent.click(button);
